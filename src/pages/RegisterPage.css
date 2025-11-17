@@ -1,0 +1,248 @@
+.login-page {
+    display: flex;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #8B7355 0%, #A52A2A 100%);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.login-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.login-image img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 12px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+}
+
+.login-form-container {
+    flex: 0 0 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 320px;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.app-title {
+    font-size: 2.2rem;
+    font-weight: 400;
+    margin-bottom: 1.8rem;
+    color: #8B4513;
+    letter-spacing: -0.5px;
+}
+
+.auth-form {
+    width: 100%;
+}
+
+.auth-title {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+    color: #654321;
+}
+
+.form-group {
+    margin-bottom: 0.8rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #D2B48C;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    background: #FAF0E6;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    color: #654321;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #A52A2A;
+    background: white;
+    box-shadow: 0 0 0 2px rgba(165, 42, 42, 0.1);
+}
+
+.form-input::placeholder {
+    color: #BC8F8F;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: #A52A2A;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 0.8rem;
+    transition: all 0.2s ease;
+}
+
+.submit-btn:hover {
+    background: #8B0000;
+    transform: translateY(-1px);
+}
+
+.login-divider {
+    position: relative;
+    margin: 1.5rem 0 0.8rem 0;
+    text-align: center;
+    color: #8B7355;
+    font-size: 0.85rem;
+}
+
+.login-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #D2B48C;
+}
+
+.login-divider span {
+    background: white;
+    padding: 0 0.8rem;
+    position: relative;
+    display: block;
+    margin-bottom: 1.2rem;
+}
+
+.login-divider p {
+    margin: 1rem 0 0 0;
+    font-size: 0.85rem;
+    color: #654321;
+}
+
+.signup-link {
+    color: #A52A2A;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.signup-link:hover {
+    color: #8B0000;
+    text-decoration: underline;
+}
+
+.facebook-login-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: #8B7355;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
+}
+
+.facebook-login-btn:hover {
+    background: #654321;
+    transform: translateY(-1px);
+}
+
+.facebook-icon {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.forgot-password {
+    margin-top: 1.2rem;
+}
+
+.forgot-password a {
+    color: #8B7355;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s ease;
+}
+
+.forgot-password a:hover {
+    color: #A52A2A;
+    text-decoration: underline;
+}
+
+.login-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.75rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .login-page {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .login-image {
+        padding: 1rem;
+        display: flex;
+    }
+
+    .login-image img {
+        max-width: 250px;
+        border-radius: 10px;
+    }
+
+    .login-form-container {
+        flex: 1;
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .login-card {
+        max-width: 100%;
+        padding: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-image img {
+        max-width: 200px;
+    }
+
+    .login-card {
+        padding: 1.5rem;
+    }
+
+    .app-title {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+}
