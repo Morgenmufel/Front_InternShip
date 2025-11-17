@@ -1,0 +1,155 @@
+
+.comment-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--carbon-dark);
+    transition: all 0.3s ease;
+}
+
+.comment-item:hover {
+    background-color: var(--carbon-light);
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.comment-header b {
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.comment-time {
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+.comment-item p {
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    word-break: break-word;
+}
+
+.comment-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.comment-actions button {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.comment-actions button:hover:not(:disabled) {
+    color: var(--orange-primary);
+    background-color: var(--carbon-lighter);
+}
+
+.comment-actions button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.comment-actions button:first-child {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.comment-actions button:first-child:hover:not(:disabled) {
+    color: var(--error-color);
+}
+
+.comment-item textarea {
+    width: 100%;
+    min-height: 60px;
+    padding: 8px 12px;
+    background-color: var(--carbon-black);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 14px;
+    resize: vertical;
+    margin-bottom: 8px;
+}
+
+.comment-item textarea:focus {
+    outline: none;
+    border-color: var(--orange-primary);
+}
+
+.comment-item .edit-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.comment-item .edit-buttons button {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.comment-item .edit-buttons button:first-child {
+    background-color: var(--orange-primary);
+    color: white;
+}
+
+.comment-item .edit-buttons button:first-child:hover:not(:disabled) {
+    background-color: var(--orange-secondary);
+}
+
+.comment-item .edit-buttons button:last-child {
+    background-color: var(--carbon-light);
+    color: var(--text-primary);
+}
+
+.comment-item .edit-buttons button:last-child:hover:not(:disabled) {
+    background-color: var(--carbon-lighter);
+}
+
+@keyframes commentFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.comment-item {
+    animation: commentFadeIn 0.3s ease-out;
+}
+
+@media (max-width: 768px) {
+    .comment-item {
+        padding: 10px 12px;
+    }
+
+    .comment-actions {
+        gap: 12px;
+    }
+
+    .comment-actions button {
+        font-size: 11px;
+        padding: 3px 6px;
+    }
+}

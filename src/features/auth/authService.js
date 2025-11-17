@@ -1,13 +1,14 @@
-import apiClient from './apiClient'
+import apiClient from '/src/features/auth/apiClient.js'
 
-const register = async (userData) => {
-    const response = await apiClient.post('/auth/register', userData)
-    return response.data
+const login = async (data) => {
+    const res = await apiClient.post('auth/login', data)
+    return res.data
 }
 
-const login = async (userData) => {
-    const response = await apiClient.post('/auth/login', userData)
-    return response.data
+const register = async (data) => {
+    const res = await apiClient.post('auth/register', data)
+    return res.data
 }
 
-export default { register, login}
+
+export default { login, register }

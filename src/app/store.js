@@ -1,9 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-import authReducer from '../features/auth/authSlice'
+import authReducer from '/src/features/auth/authSlice.js'
+import imageReducer from '/src/features/images/imageSlice.js'
+import profileReducer from '/src/features/profile/profileSlice.js'
 
-// Создаём store приложения
 export const store = configureStore({
     reducer: {
-        auth: authReducer, // Подключаем редьюсер авторизации
+        auth: authReducer,
+        images: imageReducer,
+        profile: profileReducer,
     },
 })

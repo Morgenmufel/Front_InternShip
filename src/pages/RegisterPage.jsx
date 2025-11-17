@@ -1,45 +1,65 @@
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { register } from '../features/auth/authSlice'
 import { Link, useNavigate } from 'react-router-dom'
 import AuthForm from '../components/AuthForm'
-import './LoginPage.css'
+import './RegisterPage.css'
 
 const RegisterPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const { loading, error, token } = useSelector((state) => state.auth)
+
+    const { loading, error, success } = useSelector((state) => state.auth)
 
     const handleRegister = (data) => {
         dispatch(register(data))
     }
 
-    if (token) {
-        navigate('/home')
-    }
+    useEffect(() => {
+        if (success) {
+            navigate('/login')
+        }
+    }, [success])
 
     return (
-        <div className="login-page">
-            <div className="login-form-container">
-                <div className="login-card">
-                    <h1 className="app-title">Registration</h1>
-                    <AuthForm title="Register" onSubmit={handleRegister} mode="register" />
-                    {loading && <p>Загрузка...</p>}
-                    {error && <p style={{ color: 'red' }}>{error}</p>}
+        <div className="register-page">
+            <div className="register-container">
+                <div className="register-header">
+                    <h1 className="register-title">RenyaGram</h1>
+                    <p className="register-subtitle">Create your account</p>
                 </div>
 
-                {/* Ссылка на логин */}
-                <div className="login-card">
-                    <p>
-                        Already have an account?{' '}
-                        <Link to="/login" className="link-blue">
-                            Sign in
-                        </Link>
-                    </p>
+                <AuthForm
+                    title="Register"
+                    onSubmit={handleRegister}
+                    mode="register"
+                    error={error}
+                />
+
+                {loading && (
+                    <div className="register-success">
+                        Creating your account...
+                    </div>
+                )}
+
+                {success && (
+                    <div className="register-success">
+                        Account created successfully! Redirecting to login...
+                    </div>
+                )}
+
+                <div className="register-footer">
+                    <span className="register-footer-text">
+                        Already have an account?
+                    </span>
+                    <Link to="/login" className="register-footer-link">
+                        Sign in
+                    </Link>
                 </div>
 
-                <footer className="login-footer">
-                    <p>© 2025 MyApp</p>
-                </footer>
+                <div className="register-app-footer">
+                    <p>© 2025 RenyaGram</p>
+                </div>
             </div>
         </div>
     )
