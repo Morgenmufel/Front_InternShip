@@ -27,12 +27,13 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: if npm run | grep -q " test"; then
-          echo "Running tests..."
-          npm test -- --watchAll=false
-          else
-          echo "No test script found. Skipping tests."
-          fi
+        run: |
+              if npm run | grep -q " test"; then
+              echo "Running tests..."
+              npm test -- --watchAll=false
+              else
+              echo "No test script found. Skipping tests."
+              fi
 
       - name: Build project
         run: npm run build
