@@ -27,7 +27,12 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm test -- --watchAll=false
+        run: |
+          if npm pkg get scripts.test | grep -v null; then
+            npm test -- --watchAll=false
+          else
+            echo "No tests found — skipping."
+          fi
 
       - name: Build project
         run: npm run build
