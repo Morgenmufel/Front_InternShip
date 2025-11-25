@@ -1,0 +1,172 @@
+.image-card {
+    background-color: var(--carbon-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.image-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(255, 123, 0, 0.15);
+    border-color: var(--orange-primary);
+}
+
+.image-card:active {
+    transform: translateY(-2px);
+}
+
+.delete-btn {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: rgba(255, 0, 0, 0.75);
+    border: none;
+    color: white;
+    padding: 6px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.delete-btn:hover {
+    background: red;
+}
+
+
+.image-card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.image-card:hover img {
+    transform: scale(1.02);
+}
+
+.image-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    background-color: var(--carbon-dark);
+    border-top: 1px solid var(--border-color);
+}
+
+.image-meta .like-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+}
+
+.image-meta .like-button:hover {
+    background-color: var(--carbon-light);
+}
+
+.image-meta .like-button.liked {
+    color: var(--error-color);
+}
+
+.comments-count {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+}
+
+.comments-count:hover {
+    background-color: var(--carbon-light);
+    color: var(--text-primary);
+}
+
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.image-card {
+    animation: cardFadeIn 0.5s ease-out;
+}
+
+.image-card.loading img {
+    background: linear-gradient(90deg, var(--carbon-light) 25%, var(--carbon-lighter) 50%, var(--carbon-light) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .image-card {
+        border-radius: 8px;
+    }
+
+    .image-card img {
+        height: 250px;
+    }
+
+    .image-meta {
+        padding: 12px;
+    }
+
+    .image-meta .like-button,
+    .comments-count {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .image-card img {
+        height: 200px;
+    }
+
+    .image-meta {
+        padding: 10px;
+    }
+
+    .image-meta .like-button,
+    .comments-count {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+}
+
+.image-grid .image-card {
+    break-inside: avoid;
+    margin-bottom: 20px;
+}
+
+.image-card:focus {
+    outline: 2px solid var(--orange-primary);
+    outline-offset: 2px;
+}
+
+.image-card:focus:not(:focus-visible) {
+    outline: none;
+}
