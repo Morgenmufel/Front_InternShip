@@ -6,7 +6,7 @@ import { fetchProfile } from '../features/profile/profileSlice.js'
 import './ImageCard.css'
 
 export default function ImageCard({ imageId }) {
-    const image = useSelector(s => s.images.byId[imageId])
+    const image = useSelector(s => s.images.byId?.[imageId]) // может быть undefined — это ок
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const location = useLocation()
@@ -14,15 +14,11 @@ export default function ImageCard({ imageId }) {
     const [busy, setBusy] = useState(false)
     const access = useSelector(s => s.auth.accessToken)
 
-    if (!image) {
-        return (
-            <div className="image-card image-card--empty" aria-hidden>
-                <div className="image-placeholder">Loading…</div>
-            </div>
-        )
-    }
+    // Всегда есть URL контента — даже если метаданные в сторе не успели
+    const src = `/api/images/${imageId}/content`
 
-    const isOwner = access && (() => {
+    const isOwner = (() => {
+        if (!access || !image) return false // если image нет — просто не показываем delete
         try {
             const tokenPayload = JSON.parse(atob(access.split('.')[1]))
             return tokenPayload.sub === image.userId
@@ -31,42 +27,33 @@ export default function ImageCard({ imageId }) {
         }
     })()
 
-    const openPost = () => navigate(`/image/${image.id}`)
+    const openPost = () => navigate(`/image/${imageId}`)
 
     const deleteImage = async (e) => {
         e.stopPropagation()
         if (!window.confirm("Delete this image?")) return
         if (busy) return
         setBusy(true)
-
         try {
-            const action = await dispatch(deleteImageById(image.id))
-
+            const action = await dispatch(deleteImageById(imageId))
             if (action?.payload && location.pathname.startsWith('/profile')) {
                 try {
                     const payload = JSON.parse(atob(access.split('.')[1]))
-                    if (payload?.sub) {
-                        dispatch(fetchProfile({ userId: payload.sub, page: 0 }))
-                    }
-                } catch (err) {
-                }
+                    if (payload?.sub) dispatch(fetchProfile({ userId: payload.sub, page: 0 }))
+                } catch {}
             }
-        } catch (err) {
-            console.error("Failed to delete:", err)
-            alert('Failed to delete image')
         } finally {
             setBusy(false)
         }
     }
 
     return (
-        <div
-            className="image-card"
-            onClick={openPost}
-            role="button"
-            tabIndex={0}
-        >
-            <img src={image.url} alt={image.description || 'image'} loading="lazy" />
+        <div className="image-card" onClick={openPost} role="button" tabIndex={0}>
+            <img
+                src={src}
+                alt={image?.description || 'image'}
+                loading="lazy"
+            />
             {isOwner && location.pathname.startsWith("/profile") && (
                 <button className="delete-btn" onClick={deleteImage} disabled={busy}>
                     🗑️

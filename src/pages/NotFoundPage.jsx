@@ -11,7 +11,7 @@ export default function NotFoundPage() {
 
     return (
         <div className="not-found-page">
-            {/* Декоративные элементы */}
+            {}
             <div className="not-found-decoration"></div>
             <div className="not-found-decoration"></div>
             <div className="not-found-decoration"></div>

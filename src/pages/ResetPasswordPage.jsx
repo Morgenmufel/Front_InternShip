@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
 import './LoginPage.css'
-import apiClient from "../features/auth/apiClient.js"
+import axios from "axios";
 
 export default function ResetPasswordPage() {
     const [params] = useSearchParams()
@@ -30,7 +30,7 @@ export default function ResetPasswordPage() {
         setError('')
 
         try {
-            await apiClient.post('auth/reset-password', {
+            await axios.post('auth/reset-password', {
                 token,
                 password
             })

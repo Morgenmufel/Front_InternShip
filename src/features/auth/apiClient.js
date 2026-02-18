@@ -2,7 +2,7 @@ import axios from 'axios'
 import { store } from '/src/app/store.js'
 import { logout, setTokens } from '/src/features/auth/authSlice.js'
 
-const API_URL = 'http://localhost:8080'
+const API_URL = '/api'
 
 const apiClient = axios.create({
     baseURL: API_URL,
@@ -75,7 +75,7 @@ apiClient.interceptors.response.use(
             try {
                 console.log('[REFRESH] requesting new tokens...')
                 const resp = await axios.post(
-                    `${API_URL}/auth/refresh-token`,
+                    `/auth/refresh-token`,
                     { refreshToken: refresh },
                     { withCredentials: true }
                 )

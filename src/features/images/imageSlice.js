@@ -86,6 +86,15 @@ const slice = createSlice({
     initialState,
 
     reducers: {
+
+        upsertMany(state, action) {
+            const arr = action.payload || []
+            arr.forEach(img => {
+                state.byId[img.id] = img
+            })
+        },
+
+
         clearFeed(state) {
             state.feed = { content: [], page: 0, last: false }
         },
@@ -205,35 +214,6 @@ const slice = createSlice({
                 state.error = action.payload
             })
 
-            .addCase(fetchProfile.fulfilled, (state, action) => {
-                state.loading = false
-                const newData = action.payload
-                const pageArg = action.meta.arg?.page ?? 0
-
-                newData.images.content.forEach(img => {
-                    state.byId[img.id] = img
-                })
-
-                if (pageArg === 0 || !state.profile) {
-                    state.profile = newData
-                    return
-                }
-
-                const existing = state.profile.images.content
-                const existingIds = new Set(existing.map(img => img.id))
-
-                const uniqueNew = newData.images.content.filter(
-                    img => !existingIds.has(img.id)
-                )
-
-                state.profile.images.content = [...existing, ...uniqueNew]
-
-                state.profile.images.pageable.pageNumber =
-                    newData.images.pageable.pageNumber
-
-                state.profile.images.last = newData.images.last
-            })
-
             .addCase(fetchUserImages.fulfilled, (state, action) => {
                 state.loading = false
                 state.userImages = action.payload
@@ -322,7 +302,7 @@ const slice = createSlice({
 export const {
     clearFeed,
     updateImageLike,
-    addCommentToImage,
+    addCommentToImage,upsertMany,
     updateImageCommentsCount
 } = slice.actions
 

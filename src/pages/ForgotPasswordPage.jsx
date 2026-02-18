@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './LoginPage.css'
-import apiClient from "../features/auth/apiClient.js"
+import axios from "axios";
 
 export default function ForgotPasswordPage() {
     const [email, setEmail] = useState('')
@@ -14,7 +14,7 @@ export default function ForgotPasswordPage() {
         setLoading(true)
 
         try {
-            await apiClient.post('auth/forgot-password', { email })
+            await axios.post('auth/forgot-password', { email })
             setSent(true)
         } catch (err) {
             console.error("Failed to send reset email:", err)
